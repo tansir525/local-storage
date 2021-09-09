@@ -39,8 +39,20 @@ const getCart = () => {
 
 const addProductToCart = (name) => {
   const cart = getCart();
-  cart[name] = 1;
+  if (cart[name]) {
+    cart[name] = cart[name] + 1;
+  } else {
+    cart[name] = 1;
+  }
+
   const cartStringfy = JSON.stringify(cart);
   localStorage.setItem("cart", cartStringfy);
+};
+
+// clear display and storage to click place order button
+
+const placeOrder = () => {
+  document.getElementById("products").textContent = "";
+  localStorage.removeItem("cart");
 };
 displayLocalStorageCart();
